@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { calcMethod } from './utils/calc'
+import { add, zCalc } from './utils/calc'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState<null | number>(1)
+  console.log("🚀zCalc ==> ", zCalc)
 
-  window.calcMethod = calcMethod
-
-  // console.log("🚀calcMethod ==> ", calcMethod._add(1).add(1)._add(1))
+  const handleAdd = useCallback(() => {
+    setCount(count => add(count, 1))
+  }, [])
 
   return (
     <>
@@ -23,7 +24,7 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={handleAdd}>
           count is {count}
         </button>
         <p>
